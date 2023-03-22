@@ -35,7 +35,7 @@ p a:hover {
 }
 
 .card-glass {
-    background-color: rgba(65, 34, 138, 0.55) !important;
+    background-color: rgba(93, 37, 111, 0.55) !important;
     backdrop-filter: blur(8px) saturate(160%) !important;
     -webkit-backdrop-filter: blur(8px) saturate(160%) !important;
 }

@@ -39,7 +39,8 @@ import {
   mdiBellBadge,
   mdiMessage,
   mdiHeart,
-  mdiFlash
+  mdiFlash,
+  mdiPlus
 } from '@mdi/js'
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -86,8 +87,8 @@ export default defineNuxtPlugin((nuxtApp) => {
         dropdownIcon: mdiMenuDown,
         nextArrow: mdiArrowRight,
         prevArrow: mdiArrowLeft,
-        subscribed: mdiStarFourPoints,
-        subscribe: mdiStarFourPointsOutline,
+        fatStar: mdiStarFourPoints,
+        star: mdiStarFourPointsOutline,
         youtube: mdiYoutube,
         instagram: mdiInstagram,
         facebook: mdiFacebook,
@@ -112,7 +113,8 @@ export default defineNuxtPlugin((nuxtApp) => {
         notificationBadge: mdiBellBadge,
         message: mdiMessage,
         heart2:mdiHeart,
-        flash:mdiFlash
+        flash:mdiFlash,
+        plus:mdiPlus
       },
       sets: {
         mdi,
