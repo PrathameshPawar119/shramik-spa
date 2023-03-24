@@ -28,9 +28,9 @@ const route = useRoute();
 const reactiveQuery = computed(()=> route.query);
 const skills = ref(null);
 const { $auth: auth } = useNuxtApp();
-const formData = {
+const formData = reactive({
     skill:null
-}
+});
 
 const { pending, data, error, refresh } = await useFetchApi("skills", {
     lazy:true,

@@ -31,6 +31,21 @@
                     <h1 class="mx-2 px-2">{{ user?.contact }}</h1>
                         <v-icon class="primary--text" icon="$pencil"></v-icon>
                 </v-row>
+                <v-row no-gutters class="mt-4">
+                    <v-col class="pa-1">
+                        <LazyProfileCreatePost />
+                    </v-col>
+                    <v-col class="pa-1">
+                        <v-card height="80" @click="" class="card-glass pa-3">
+                            <h1 class="text-button text-center pt-4">Add Experience</h1>
+                        </v-card>
+                    </v-col>
+                    <v-col class="pa-1">
+                        <v-card height="80" @click="" class="card-glass pa-3">
+                            <h1 class="text-button text-center pt-4">Social Profile</h1>
+                        </v-card>
+                    </v-col>
+                </v-row>
                 <v-row justify="center" class="pa-2">
                     <v-col cols="12" class="rounded-lg pa-4 mt-2 text-center">
                         <v-card class="mx-auto rounded-lg" elevation="4" variant="outlined">
@@ -109,7 +124,6 @@ watch(reactiveQuery, ()=>{
 
 
 async function removeSkill(e){
-    console.log(e.target);
     const { pending, data, error, refresh } = await useFetchApi('customer/skillaction', {
         type:"DELETE",
         lazy:true,
