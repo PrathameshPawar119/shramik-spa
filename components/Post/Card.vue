@@ -13,14 +13,14 @@
       height="250"
       style="margin-top: 0px; cursor: pointer;"
       @click="navigateTo(`/${post.id}/post`)"
-      :src="post.image ? post.image : 'https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'"
+      :src="post.image ? ('http://localhost:8000/'+post.image) : 'https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'"
     ></v-img>
     <div class="content" style="text-align: start;">
       <v-card-text class="text-h6 mt-2">
         <div class="chips mt-0 px-1" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between;">
           <div>
             <v-chip>Project Completed</v-chip>
-            <v-chip>Painting</v-chip>
+            <v-chip>Painting</v-chip> 
           </div>
           <p style="font-size: 14px;" class="text-h7">{{ formatDate(post.created_at).formattedDate}}</p>
         </div>
@@ -45,15 +45,14 @@
           <v-list-item-title style="text-align: start; cursor: pointer;" @click="navigateTo(`/${post.creator}/social`)">
             {{post.name}}
           </v-list-item-title>
-          <v-list-item-subtitle style="text-align: start;">{{ post.title }}</v-list-item-subtitle>
+          <v-list-item-subtitle class="text-h6" style="text-align: start;">{{ post.title }}</v-list-item-subtitle>
 
         <template v-slot:append>
-          <div class="justify-self-end">
+          <div class="justify-self-end" style="display:flex; flex-direction: row; justify-content: end; align-items: center;">
             <v-icon class="me-1" icon="$heart2"></v-icon>
             <span class="subheading me-2">{{post.likes}}</span>
             <span class="me-1">·</span>
-            <v-icon class="me-1" icon="$share"></v-icon>
-            <span class="subheading">45</span>
+            <v-card-text class="me-1" @click.stop="share" :title="post.title" :id="post.id" style="cursor: pointer;">Share</v-card-text>
           </div>
         </template>
       </v-list-item>
@@ -62,6 +61,7 @@
 </template>
 
 <script setup>
+const {$assetUrl:assetUrl} = useNuxtApp();
 
 const props = defineProps({
     post:{
@@ -70,18 +70,20 @@ const props = defineProps({
     }
 })
 
-// let content = (props.post.content).slice(0,80);
-// const readMore = ref(false);
-// function alterContentLen(){
-//   if (readMore) {
-//     content = content.slice(0,40);
-//     readMore.value = false;
-//   }
-//   else{
-//     content = props.post.content;
-//     readMore.value = true;
-//   }
-// }
+const route = useRoute();
+
+let content = (props.post.content).slice(0,80);
+const readMore = ref(false);
+function alterContentLen(){
+  if (readMore) {
+    content = content.slice(0,40);
+    readMore.value = false;
+  }
+  else{
+    content = props.post.content;
+    readMore.value = true;
+  }
+}
 
 // killer date conversion function
 function formatDate(raw) {
@@ -97,6 +99,20 @@ function formatDate(raw) {
   }).format(rawDate);
 
   return { date, month, formattedDate };
+}
+
+
+async function share(e) {
+  const id = e.target.getAttribute("id");
+    const shareData = {
+        title: `Shramik Post - ${e.target.getAttribute("title")}`,
+        url: "https://www.iaa.org.in" + route.path,
+    };
+    try {
+        await navigator.share(shareData);
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 </script>

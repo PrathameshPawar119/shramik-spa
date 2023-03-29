@@ -8,8 +8,23 @@
       <v-row no-gutters>
         <v-col v-for="(account, i) in accountItems" :key="i" class="pa-1">
           <v-card height="100" :to="account.to" class="card-glass">
-            <h1 class="text-button text-center pt-4">{{ account.title }}</h1>
+            <h1 class=" text-center mt-6" style="font-size: xx-large;">{{ account.title }}</h1>
           </v-card>
+        </v-col>
+      </v-row>
+      <v-row no-gutters class="mt-4">
+        <v-col class="pa-1">
+            <LazyProfileCreatePost />
+        </v-col>
+        <v-col class="pa-1">
+            <v-card height="80" @click="" class="card-glass pa-3">
+                <h1 class="text-button text-center mt-4">Experience</h1>
+            </v-card>
+        </v-col>
+        <v-col class="pa-1">
+            <v-card height="80" @click="" class="card-glass pa-3">
+                <h1 class="text-button text-center mt-4">Social Profile</h1>
+            </v-card>
         </v-col>
       </v-row>
 

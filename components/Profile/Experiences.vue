@@ -51,12 +51,12 @@
                             </v-row>
                             <v-col cols="12">
                                 
-                            <section v-if="allTags.length >0">
-                                {{ allTags._value }}
+                            <section v-if="pending == false">
+                                {{ allTags }}
                                 <v-col cols="12">
                                     <v-combobox
                                     v-model="formData.tags"
-                                    :items="allTags._value"
+                                    :items="ooo"
                                     label="Select tags"
                                     multiple
                                     chips
@@ -64,7 +64,6 @@
                                 </v-col>
                             </section>
                             <section v-else>
-                                <loading message="loading tags..."/>
                             </section>
                         </v-col>
                         <v-card-actions>
@@ -98,6 +97,8 @@ const route = useRoute();
 const reactiveQuery = computed(() => route.query);
 const allTags = ref([]);
 
+const ooo = ref(['my', 'name', 'is', 'khan']);
+
 const formData = reactive({
     title:null,
     content: null,
@@ -123,7 +124,7 @@ async function submitForm()
     reqData.append('title', formData.title);
     reqData.append('content', formData.content);
     reqData.append('image', formData.image);
-    reqData.append('tags',( formData.tags).length >0 ? formData.tags : ['new']);
+    reqData.append('tags', formData.tags);
     reqData.append('city', formData.city);
 
     try {
@@ -153,15 +154,9 @@ const {pending, data, error, refresh} = await useFetchApi('tags', {
     query: reactiveQuery
 });
 
-watch(data, ()=>{
-    allTags.value = computed(()=>{
-        return data.value.data.map((obj)=> obj.name);
-    })
-})
 allTags.value = computed(()=>{
     return data.value.data.map((obj)=> obj.name);
 })
-console.log(allTags);
 
 // ooo.value = allTags.value
 

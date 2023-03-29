@@ -61,7 +61,7 @@ const filters = [
 ]
 
 const posts = ref(null);
-const {pending, data, error, refresh } = await useFetchApi("posts/popular", {
+const {pending, data, error, refresh } = await useFetchApi("posts/new", {
   lazy:true,
   query:{page: 1}
 })

@@ -8,8 +8,6 @@
                 {{ error }}
         </section>
         <section v-else>
-            {{ user }}
-            {{ skills }}
             <v-container class="card-glass" style="border-radius: 8px;">
                 <v-row
                 class="ma-4"
