@@ -14,6 +14,9 @@
                 class="ma-4"></v-autocomplete>
                 <button class="mx-auto bg-gray hover:bg-slate-400 pa-3 " id="closeModal" @click="dialogBox = false"><v-icon icon="$close"></v-icon></button>
                 <v-btn variant="tonal" class="mx-auto my-1 " @click="addSkill">Submit</v-btn>
+                <v-btn id="closedialogbtn" @click="dialogBox= false">
+                    Close
+                </v-btn>
             </v-card>
         </section>
     </v-dialog>
@@ -41,7 +44,7 @@ watch(data, ()=>{
 })
 
 async function addSkill(){
-    console.log("addskill");
+        document.getElementById("closedialogbtn").click();
     const { pending, data, error, refresh } = await useFetchApi("/customer/skillaction", {
         method:"POST",
         body:{

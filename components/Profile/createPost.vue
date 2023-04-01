@@ -78,6 +78,9 @@
                         <v-btn @click="handleReset">
                             clear
                         </v-btn>
+                        <v-btn id="closedialogbtn" @click="dialogBox= false">
+                            Close
+                        </v-btn>
                         
                     </v-card-actions>
                 </v-card>
@@ -119,6 +122,8 @@ const onFileChange = (e)=>{
 
 async function submitForm()
 {
+        document.getElementById("closedialogbtn").click();
+
     const reqData = new FormData();
     reqData.append('title', formData.title);
     reqData.append('content', formData.content);

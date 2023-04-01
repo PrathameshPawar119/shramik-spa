@@ -1,9 +1,10 @@
 <template>
   <v-card
-    class="mx-auto my-4 card-glass"
+    class="mx-4 my-4 card-glass"
     color="purple-darken-4"
     theme="light"
     max-width="540"
+    
   >
     <!-- <template v-slot:prepend>
       <v-icon size="x-large"></v-icon>
@@ -31,31 +32,38 @@
       </v-card-text>
     </div>
 
-    <v-card-actions>
-      <v-list-item class="w-100">
-        <template v-slot:prepend>
-            <v-avatar
-            @click="navigateTo(`/${post.creator}/social`)"
-            class="cursor-pointer"
-            color="grey-darken-3"
-            image="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-            ></v-avatar>
-        </template>
-        
-          <v-list-item-title style="text-align: start; cursor: pointer;" @click="navigateTo(`/${post.creator}/social`)">
-            {{post.name}}
-          </v-list-item-title>
-          <v-list-item-subtitle class="text-h6" style="text-align: start;">{{ post.title }}</v-list-item-subtitle>
+    <v-card-actions >
+      <section v-if="type=='postcard'">
+        <v-list-item class="w-100">
+          <template v-slot:prepend>
+              <v-avatar
+              @click="navigateTo(`/${post.creator}/social`)"
+              class="cursor-pointer"
+              color="grey-darken-3"
+              image="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+              ></v-avatar>
+          </template>
+          
+            <v-list-item-title style="text-align: start; cursor: pointer;" @click="navigateTo(`/${post.creator}/social`)">
+              {{post.name}}
+            </v-list-item-title>
+            <v-list-item-subtitle class="text-h6" style="text-align: start;">{{ post.title }}</v-list-item-subtitle>
+  
+          <template v-slot:append>
+            <div class="justify-self-end" style="display:flex; flex-direction: row; justify-content: end; align-items: center;">
+              <v-icon class="me-1" icon="$heart2"></v-icon>
+              <span class="subheading me-2">{{post.likes ? post.likes: ''}}</span>
+              <span class="me-1">·</span>
+              <v-card-text class="me-1" @click.stop="share" :title="post.title" :id="post.id" style="cursor: pointer;">Share</v-card-text>
+            </div>
+          </template>
+        </v-list-item>
+      </section>
+      <section v-else-if="type== 'experience-card'">
 
-        <template v-slot:append>
-          <div class="justify-self-end" style="display:flex; flex-direction: row; justify-content: end; align-items: center;">
-            <v-icon class="me-1" icon="$heart2"></v-icon>
-            <span class="subheading me-2">{{post.likes}}</span>
-            <span class="me-1">·</span>
-            <v-card-text class="me-1" @click.stop="share" :title="post.title" :id="post.id" style="cursor: pointer;">Share</v-card-text>
-          </div>
-        </template>
-      </v-list-item>
+        <v-btn variant="tonal">Delete</v-btn>
+        <v-btn variant="tonal">Edit</v-btn>
+      </section>
     </v-card-actions>
   </v-card>
 </template>
@@ -67,6 +75,10 @@ const props = defineProps({
     post:{
         type:Object,
         required:true
+    },
+    type:{
+      type:String,
+      required:true
     }
 })
 

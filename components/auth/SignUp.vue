@@ -48,6 +48,9 @@
             class="mx-4"
             :error-messages="v$.contact.$errors[0] ? v$.contact.$errors[0].$message : ''"
         ></v-text-field>
+        <v-autocomplete v-model="registerform.city" :items="cities.getCities" item-title="name" item-value="url" label="Search"
+          class="ma-4" outlined prepend-inner-icon="$location" @update:model-value="changeCity"></v-autocomplete>
+
 
         <div class="d-flex justify-center">
             <v-btn color="primary" class="p-2 ma-2 mb-4" @click.prevent="registerData">Sign up</v-btn>
@@ -59,6 +62,11 @@
 import { reactive } from 'vue';
 import { useVuelidate } from "@vuelidate/core";
 import { required, helpers, minLength, integer } from "@vuelidate/validators";
+import { useCitiesStore } from "@/stores/cities";
+import { storeToRefs } from "pinia";
+
+const cities = useCitiesStore();
+const {defaultCity, cookieCity} = storeToRefs(cities);
 
 const props = defineProps({
     formData: {
@@ -76,7 +84,8 @@ const registerform = reactive({
     name: null,
     password: null,
     c_password: null,
-    contact: null
+    contact: null,
+    city:null
 });
 
 const rules = computed(() => {
@@ -97,6 +106,9 @@ const rules = computed(() => {
       integer: helpers.withMessage(`must be a valid contact`, integer),
       minLength: minLength(contactlength.value),
     },
+    city: {
+      required: helpers.withMessage(`City be a valid contact`, required),
+    },
   };
 
   return localRules;
@@ -116,6 +128,7 @@ async function registerData(){
                 password: registerform.password,
                 c_password: registerform.c_password,
                 contact: registerform.contact,
+                city: registerform.city
             },
         });
 

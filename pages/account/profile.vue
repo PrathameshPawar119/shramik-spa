@@ -34,25 +34,14 @@
                         <LazyProfileCreatePost />
                     </v-col>
                     <v-col class="pa-1">
-                        <v-card height="80" @click="" class="card-glass pa-3">
-                            <h1 class="text-button text-center pt-4">Add Experience</h1>
-                        </v-card>
+                        <LazyProfileExperiences />
                     </v-col>
                     <v-col class="pa-1">
-                        <v-card height="80" @click="" class="card-glass pa-3">
-                            <h1 class="text-button text-center pt-4">Social Profile</h1>
-                        </v-card>
+                        <LazyProfileViewSocial />
                     </v-col>
                 </v-row>
-                <v-row justify="center" class="pa-2">
-                    <v-col cols="12" class="rounded-lg pa-4 mt-2 text-center">
-                        <v-card class="mx-auto rounded-lg" elevation="4" variant="outlined">
-                        <v-card-title class="text-start text-h5 ma-2">Experience</v-card-title>
-                        <div class="ma-4 rounded-xl py-3">
-                            
-                        </div>
-                        </v-card>
-                    </v-col>
+                <v-row justify="center" class="pa-2 cols-12">
+                    <ProfileExperiencesSection :id="user.id"/>
                 </v-row>
                 <v-row justify="center" class="pa-2">
                     <v-col cols="12" class="rounded-lg pa-4 mt-2 text-center">
@@ -119,6 +108,8 @@ watch(data, ()=>{
 watch(reactiveQuery, ()=>{
     refresh();
 })
+
+
 
 
 async function removeSkill(e){

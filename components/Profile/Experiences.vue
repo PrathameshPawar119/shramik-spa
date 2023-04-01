@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-card height="80" @click="dialogBox = true" class="card-glass pa-3">
-            <h1 class="text-button text-center pt-4">Add Post</h1>
+            <h1 class="text-button text-center pt-4">Add Experience</h1>
         </v-card>
         <v-dialog v-model="dialogBox" :persistent="skills === null ? true : false" max-width="800">
             <section v-if="pending">
@@ -10,7 +10,7 @@
             <section v-else>
                 <form @submit.prevent="submitForm">
                     <v-card class="card">
-                        <v-card-title>Create New Post</v-card-title>
+                        <v-card-title>Create New Experience</v-card-title>
                         <v-text-field
                             v-model="formData.title"
                             label="Title"
@@ -26,7 +26,7 @@
                         <v-textarea
                             v-model="formData.content"
                             label="Content"
-                            placeholder="Enter post content"
+                            placeholder="Enter Experience summary"
                             name="content"
                             type="text"
                             hide-spin-buttons
@@ -77,6 +77,9 @@
                         <v-btn @click="handleReset">
                             clear
                         </v-btn>
+                        <v-btn id="closedialogbtn" @click="dialogBox= false">
+                            Close
+                        </v-btn>
                         
                     </v-card-actions>
                 </v-card>
@@ -120,15 +123,16 @@ const onFileChange = (e)=>{
 
 async function submitForm()
 {
+    document.getElementById("closedialogbtn").click();
     const reqData = new FormData();
     reqData.append('title', formData.title);
     reqData.append('content', formData.content);
     reqData.append('image', formData.image);
-    reqData.append('tags', formData.tags);
+    reqData.append('tags',( formData.tags).length > 0 ? formData.tags : ['new']);
     reqData.append('city', formData.city);
 
     try {
-        const {pending, data, error, refresh} = await useFetchApi('post/createpost', {
+        const {pending, data, error, refresh} = await useFetchApi('customer/create-exp', {
             method: "POST",
             header:{
                 'Content-Type':'multipart/form-data'
