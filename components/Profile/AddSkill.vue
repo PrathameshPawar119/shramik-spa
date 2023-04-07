@@ -10,11 +10,10 @@
         <section>
             <v-card class="card">
                 <v-card-title>Select skill from below box</v-card-title>
-                <v-autocomplete v-model="formData.skill" :items="skills" item-title="name" item-value="url" label="Search"
+                <v-autocomplete v-model="formData.skill" :items="skills" item-title="name" item-value="id" label="Select skill"
                 class="ma-4"></v-autocomplete>
-                <button class="mx-auto bg-gray hover:bg-slate-400 pa-3 " id="closeModal" @click="dialogBox = false"><v-icon icon="$close"></v-icon></button>
-                <v-btn variant="tonal" class="mx-auto my-1 " @click="addSkill">Submit</v-btn>
-                <v-btn id="closedialogbtn" @click="dialogBox= false">
+                <v-btn variant="tonal" class="m-2 p-4" @click="addSkill">Submit</v-btn>
+                <v-btn class="m-2 p-4" id="closedialogbtn" @click="dialogBox= false">
                     Close
                 </v-btn>
             </v-card>
@@ -31,6 +30,7 @@ const route = useRoute();
 const reactiveQuery = computed(()=> route.query);
 const skills = ref(null);
 const { $auth: auth } = useNuxtApp();
+const emit = defineEmits("getSkill");
 const formData = reactive({
     skill:null
 });
@@ -49,12 +49,14 @@ async function addSkill(){
         method:"POST",
         body:{
             customers_id: auth.value.user.data.user.id,
-            skill_name:formData.skill
+            skills_id:formData.skill
         },
         lazy:true,
         query:reactiveQuery
     })
-    // document.getElementById("closeModal").click();
+    if(data.value){
+        emit("getSkill", data.value.data);
+    }
 
 }
 watch( reactiveQuery, ()=>{

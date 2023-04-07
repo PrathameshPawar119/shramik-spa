@@ -9,7 +9,7 @@
             okok
           </div>
           <div class="postsSection">
-            <post-card v-for="(post, i) in posts" :key="i" :post="post" type="potcard"/>
+            <post-card v-for="(post, i) in posts" :key="i" :post="post" type="postcard"/>
           </div>
           <div class="leftSection d-none d-sm-flex">
             <v-btn @click="drawer=true" class="mx-auto" size="large" variant="tonal" color="primary" prepend-icon="$filter">Filters</v-btn>

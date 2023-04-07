@@ -50,21 +50,20 @@
                                 class="ma-4" outlined prepend-inner-icon="$location"></v-autocomplete>
                             </v-row>
                             <v-col cols="12">
-                                
-                            <section v-if="pending == false">
-                                {{ allTags }}
-                                <v-col cols="12">
-                                    <v-combobox
-                                    v-model="formData.tags"
-                                    :items="ooo"
-                                    label="Select tags"
-                                    multiple
-                                    chips
-                                    ></v-combobox>
-                                </v-col>
-                            </section>
-                            <section v-else>
-                            </section>
+                                <section v-if="allTags.length > 0">
+                                    <v-col cols="12">
+                                        <v-combobox
+                                        v-model="formData.tags"
+                                        :items="allTags"
+                                        label="Select tags"
+                                        multiple
+                                        chips
+                                        ></v-combobox>
+                                    </v-col>
+                                </section>
+                                <section v-else>
+                                    <loading message="loading tags..." />
+                                </section>
                         </v-col>
                         <v-card-actions>
                             <v-btn
@@ -98,9 +97,6 @@ const dialogBox = ref(false);
 const {$useFetchApi:useFetchApi} = useNuxtApp();
 const route = useRoute();
 const reactiveQuery = computed(() => route.query);
-const allTags = ref([]);
-
-const ooo = ref(['my', 'name', 'is', 'khan']);
 
 const formData = reactive({
     title:null,
@@ -158,11 +154,10 @@ const {pending, data, error, refresh} = await useFetchApi('tags', {
     query: reactiveQuery
 });
 
-allTags.value = computed(()=>{
+
+const allTags = computed(()=>{
     return data.value.data.map((obj)=> obj.name);
 })
-
-// ooo.value = allTags.value
 
 watch(reactiveQuery, ()=>{
     refresh();

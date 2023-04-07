@@ -20,8 +20,7 @@
       <v-card-text class="text-h6 mt-2">
         <div class="chips mt-0 px-1" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between;">
           <div>
-            <v-chip>Project Completed</v-chip>
-            <v-chip>Painting</v-chip> 
+            <v-chip v-for="(tag, i) in post.tags" :key="i">{{ tag }}</v-chip>
           </div>
           <p style="font-size: 14px;" class="text-h7">{{ formatDate(post.created_at).formattedDate}}</p>
         </div>

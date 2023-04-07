@@ -40,7 +40,9 @@ import {
   mdiMessage,
   mdiHeart,
   mdiFlash,
-  mdiPlus
+  mdiPlus,
+  mdiBookmark,
+  mdiBookmarkRemove
 } from '@mdi/js'
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -106,15 +108,17 @@ export default defineNuxtPlugin((nuxtApp) => {
         accountCircle: mdiAccountCircle,
         pencil: mdiPencil,
         ticket: mdiTicket,
-        home:mdiHome,
+        home: mdiHome,
         group: mdiAccountGroupOutline,
         jobs: mdiAccountHardHat,
-        notification:mdiBell,
+        notification: mdiBell,
         notificationBadge: mdiBellBadge,
         message: mdiMessage,
-        heart2:mdiHeart,
-        flash:mdiFlash,
-        plus:mdiPlus
+        heart2: mdiHeart,
+        flash: mdiFlash,
+        plus: mdiPlus,
+        bookmark: mdiBookmark,
+        bookmarkRem: mdiBookmarkRemove,
       },
       sets: {
         mdi,
