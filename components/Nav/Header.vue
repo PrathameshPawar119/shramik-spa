@@ -19,7 +19,7 @@
         </v-list>
       </v-navigation-drawer>
         <v-app-bar
-            color="primry"
+            color=""
             elevation="4"
             :collapse="false"
           >

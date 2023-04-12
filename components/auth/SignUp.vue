@@ -59,7 +59,6 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue';
 import { useVuelidate } from "@vuelidate/core";
 import { required, helpers, minLength, integer } from "@vuelidate/validators";
 import { useCitiesStore } from "@/stores/cities";
