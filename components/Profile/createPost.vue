@@ -51,12 +51,12 @@
                             </v-row>
                             <v-col cols="12">
                                 
-                            <section v-if="allTags.length >0">
-                                {{ allTags._value }}
+                                {{ (allTags) }}
+                            <section v-if="allTags">
                                 <v-col cols="12">
-                                    <v-combobox
+                                  <v-combobox
                                     v-model="formData.tags"
-                                    :items="allTags._value"
+                                    :items="allTags"
                                     label="Select tags"
                                     multiple
                                     chips
@@ -158,15 +158,12 @@ const {pending, data, error, refresh} = await useFetchApi('tags', {
     query: reactiveQuery
 });
 
-watch(data, ()=>{
-    allTags.value = computed(()=>{
-        return data.value.data.map((obj)=> obj.name);
-    })
-})
-allTags.value = computed(()=>{
-    return data.value.data.map((obj)=> obj.name);
-})
-console.log(allTags);
+// watch(data, ()=>{
+//     allTags.value = computed(()=>{
+//         return data.value.data.map((obj)=> obj.name);
+//     })
+// })
+allTags.value = data.value.data.map((obj)=> obj.name);
 
 // ooo.value = allTags.value
 
@@ -174,6 +171,7 @@ watch(reactiveQuery, ()=>{
     refresh();
 })
 
+console.log("all tags", allTags.value);
 
 
 </script>
