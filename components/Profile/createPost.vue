@@ -50,8 +50,6 @@
                                 class="ma-4" outlined prepend-inner-icon="$location"></v-autocomplete>
                             </v-row>
                             <v-col cols="12">
-                                
-                                {{ (allTags) }}
                             <section v-if="allTags">
                                 <v-col cols="12">
                                   <v-combobox

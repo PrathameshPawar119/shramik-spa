@@ -12,10 +12,12 @@
                 <v-card-title>Select skill from below box</v-card-title>
                 <v-autocomplete v-model="formData.skill" :items="skills" item-title="name" item-value="id" label="Select skill"
                 class="ma-4"></v-autocomplete>
-                <v-btn variant="tonal" class="m-2 p-4" @click="addSkill">Submit</v-btn>
-                <v-btn class="m-2 p-4" id="closedialogbtn" @click="dialogBox= false">
-                    Close
-                </v-btn>
+                <v-card-actions>
+                    <v-btn variant="tonal" @click="addSkill">Submit</v-btn>
+                    <v-btn id="closedialogbtn" @click="dialogBox= false">
+                        Close
+                    </v-btn>
+                </v-card-actions>
             </v-card>
         </section>
     </v-dialog>

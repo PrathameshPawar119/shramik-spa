@@ -13,20 +13,27 @@
         </v-col>
       </v-row>
       <v-row no-gutters class="mt-4">
-        <v-col class="pa-1">
-            <LazyProfileCreatePost />
-        </v-col>
-        <v-col class="pa-1">
-            <v-card height="80" @click="" class="card-glass pa-3">
-                <h1 class="text-button text-center mt-4">Experience</h1>
-            </v-card>
-        </v-col>
-        <v-col class="pa-1">
-            <v-card height="80" @click="" class="card-glass pa-3">
-                <h1 class="text-button text-center mt-4">Social Profile</h1>
-            </v-card>
-        </v-col>
-      </v-row>
+                    <v-col class="pa-1">
+                        <LazyProfileCreatePost />
+                    </v-col>
+                    <v-col class="pa-1">
+                        <LazyProfileExperiences />
+                    </v-col>
+                    <v-col class="pa-1" v-if="user?.hasCompany == false">
+                        <NuxtLink to="/newcompany">
+                            <v-card height="80" class="card-glass pa-3">
+                                <h1 class="text-button text-center pt-4">Create Company</h1>
+                            </v-card>
+                        </NuxtLink>
+                    </v-col>
+                    <v-col class="pa-1" v-if="user?.hasCompany == true">
+                        <a href="http://localhost:8000/contractor/login" target="_blank">
+                            <v-card height="80" class="card-glass pa-3">
+                                <h1 class="text-button text-center pt-4">Company Dashboard</h1>
+                            </v-card>
+                        </a>
+                    </v-col>
+                </v-row>
 
       <v-app-bar fixed bottom>
         <v-btn block class="primary w-25" @click="logout">logout</v-btn></v-app-bar

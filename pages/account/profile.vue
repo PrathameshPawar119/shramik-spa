@@ -33,8 +33,19 @@
                     <v-col class="pa-1">
                         <LazyProfileExperiences />
                     </v-col>
-                    <v-col class="pa-1">
-                        <LazyProfileViewSocial />
+                    <v-col class="pa-1" v-if="user?.hasCompany == false">
+                        <NuxtLink to="/newcompany">
+                            <v-card height="80" class="card-glass pa-3">
+                                <h1 class="text-button text-center pt-4">Create Company</h1>
+                            </v-card>
+                        </NuxtLink>
+                    </v-col>
+                    <v-col class="pa-1" v-if="user?.hasCompany == true">
+                        <a href="http://localhost:8000/contractor/login" target="_blank">
+                            <v-card height="80" class="card-glass pa-3">
+                                <h1 class="text-button text-center pt-4">Company Dashboard</h1>
+                            </v-card>
+                        </a>
                     </v-col>
                 </v-row>
                 <v-row justify="center">

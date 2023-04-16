@@ -107,8 +107,12 @@ import { required, helpers, minLength, integer, email, url } from "@vuelidate/va
 import { useCitiesStore } from "@/stores/cities";
 import { storeToRefs } from "pinia";
 
+const { $auth: auth } = useNuxtApp();
 const cities = useCitiesStore();
 const { $useFetchApi: useFetchApi} = useNuxtApp();
+const user = computed(() => {
+    return auth.value.user.data.user;
+});
 
 const formData = reactive({
     name:null,
@@ -203,7 +207,8 @@ async function createCompany()
         {
             formData.submitting = false;
             formData.submitted = true;
-            console.log(data.value)
+
+            user.value.hasCompany = true;
         }
         if(error.value)
         {
