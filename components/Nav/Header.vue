@@ -170,7 +170,7 @@ const tabs = [
 
   const AccountActions = [
     {
-        name:'My Profile',
+        name:'Account',
         href:'/account',
     },
     {
