@@ -150,7 +150,7 @@ async function handleReset()
     formData.city = null;
 }
 
-const {pending, data, error, refresh} = await useFetchApi('tags', {
+const {pending, data, error, refresh} = await useFetchApi('tags/getall', {
     query: reactiveQuery
 });
 

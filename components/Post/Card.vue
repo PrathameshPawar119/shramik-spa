@@ -20,7 +20,7 @@
       <v-card-text class="text-h6 mt-2">
         <div class="chips mt-0 px-1" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between;">
           <div>
-            <v-chip v-for="(tag, i) in post.tags" :key="i">{{ tag }}</v-chip>
+            <v-chip class="mx-1" v-for="(tag, i) in post.tags" :key="i">{{ tag }}</v-chip>
           </div>
           <p style="font-size: 14px;" class="text-h7">{{ formatDate(post.created_at).formattedDate}}</p>
         </div>
@@ -46,7 +46,7 @@
             <v-list-item-title style="text-align: start; cursor: pointer;" @click="navigateTo(`/${post.creator}/social`)">
               {{post.name}}
             </v-list-item-title>
-            <v-list-item-subtitle class="text-h6" style="text-align: start;">{{ post.title }}</v-list-item-subtitle>
+            <v-list-item-subtitle class="text-subtitle-1" style="text-align: start;">{{ post.title }}</v-list-item-subtitle>
   
           <template v-slot:append>
             <div class="justify-self-end" style="display:flex; flex-direction: row; justify-content: end; align-items: center;">

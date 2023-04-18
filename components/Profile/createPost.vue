@@ -152,7 +152,7 @@ async function handleReset()
     formData.city = null;
 }
 
-const {pending, data, error, refresh} = await useFetchApi('tags', {
+const {pending, data, error, refresh} = await useFetchApi('tags/getall', {
     query: reactiveQuery
 });
 
@@ -161,7 +161,10 @@ const {pending, data, error, refresh} = await useFetchApi('tags', {
 //         return data.value.data.map((obj)=> obj.name);
 //     })
 // })
-allTags.value = data.value.data.map((obj)=> obj.name);
+// watch(data, ()=>{
+    allTags.value = data.value.data.map((obj)=> obj.name);
+// })
+console.log(allTags.value)
 
 // ooo.value = allTags.value
 
