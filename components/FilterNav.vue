@@ -64,6 +64,7 @@ let selected = reactive({});
 // controls the chips to show applied filters
 let appliedFilters = reactive({});
 const skills = ref([]);
+const addSkill = ref(true);
 
 function updateFilters(name, option) {
     if (!selected[name]) {
@@ -98,12 +99,27 @@ onMounted(() => {
 const { pending, data, error, refresh } = await useFetchApi('skills', {
     lazy:true
 });
+
 watch(data, ()=>{
     skills.value = data.value.data;
-    props.filterList.push({
-        name: 'skills',
-        options: data.value.data
-    });
+
+    // check is there duplicate skills section
+    for (let i = 0; i < props.filterList.length; i++) {
+        const filter = props.filterList[i];
+        console.log(filter);
+        if(filter.name == 'skills')
+        {
+            addSkill.value = false;
+            break;
+        }
+    }
+    if(addSkill.value)
+    {
+        props.filterList.push({
+            name: 'skills',
+            options: data.value.data
+        });
+    }
 })
 
 function parseQueryFilters() {
